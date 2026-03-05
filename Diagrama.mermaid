@@ -1,0 +1,54 @@
+erDiagram
+    RESTAURANTE ||--o{ PRODUTO : possui
+    CLIENTE ||--o{ PEDIDO : faz
+    PEDIDO ||--o{ ITEM_PEDIDO : contem
+    PRODUTO ||--o{ ITEM_PEDIDO : referencia
+
+    RESTAURANTE {
+        bigint id PK
+        varchar nome
+        varchar descricao
+        varchar endereco
+        varchar telefone
+        datetime data_criacao
+        boolean ativo
+    }
+
+    PRODUTO {
+        bigint id PK
+        bigint restaurante_id FK
+        varchar nome
+        varchar descricao
+        decimal preco
+        boolean disponivel
+        datetime data_criacao
+    }
+
+    CLIENTE {
+        bigint id PK
+        varchar nome
+        varchar email UK
+        varchar telefone
+        varchar endereco
+        varchar cpf
+        datetime data_criacao
+    }
+
+    PEDIDO {
+        bigint id PK
+        bigint cliente_id FK
+        datetime data_pedido
+        varchar endereco_entrega
+        varchar status
+        decimal taxa_entrega
+        decimal total
+    }
+
+    ITEM_PEDIDO {
+        bigint id PK
+        bigint pedido_id FK
+        bigint produto_id FK
+        int quantidade
+        decimal preco_unitario
+        decimal subtotal
+    }
