@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  # Banco de dados MySQL
+  mysql:
+    image: mysql:8.0
+    container_name: delivery-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: delivery_db
+      MYSQL_USER: delivery_user
+      MYSQL_PASSWORD: delivery123
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - delivery-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot123"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Cache Redis
+  redis:
+    image: redis:7-alpine
+    container_name: delivery-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - delivery-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+# Volumes para persistir dados
+volumes:
+  mysql-data:
+    driver: local
+
+# Rede para comunicação entre containers
+networks:
+  delivery-network:
+    driver: bridge
