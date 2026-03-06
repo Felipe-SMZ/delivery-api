@@ -1,5 +1,6 @@
 package com.delivery.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -37,6 +38,7 @@ public class Produto {
     private LocalDateTime dataCriacao;
 
     // Relacionamento: Muitos produtos pertencem a UM restaurante
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurante_id", nullable = false)
     private Restaurante restaurante;

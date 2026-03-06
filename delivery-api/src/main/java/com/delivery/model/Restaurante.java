@@ -1,5 +1,6 @@
 package com.delivery.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -41,6 +42,7 @@ public class Restaurante {
     private Boolean ativo = true;
 
     // Relacionamento: Um restaurante TEM MUITOS produtos
+    @JsonManagedReference
     @OneToMany(mappedBy = "restaurante", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Produto> produtos = new ArrayList<>();
 
