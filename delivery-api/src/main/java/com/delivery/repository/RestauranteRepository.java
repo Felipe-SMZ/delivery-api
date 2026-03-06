@@ -32,4 +32,7 @@ public interface RestauranteRepository extends JpaRepository<Restaurante, Long> 
 
     //Conta quantos restaurantes estão ativos.
     long countByAtivoTrue();
+
+    //Buscar restaurante por id
+    boolean existsById(Long id);
 }
