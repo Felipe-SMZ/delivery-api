@@ -74,7 +74,7 @@ public class ProdutoController {
     // DELETE /api/produtos/{id}
     // Inativar produto
     @DeleteMapping("/{id}")
-    public ResponseEntity<Produto> inativar(@PathVariable long id) {
+    public ResponseEntity<Void> inativar(@PathVariable long id) {
         produtoService.inativar(id);
         return ResponseEntity.noContent().build();
     }
@@ -82,13 +82,13 @@ public class ProdutoController {
     // PATCH  /api/produtos/{id}/ativar
     // Ativar produto
     @PatchMapping("/{id}/ativar")
-    public ResponseEntity<Produto> ativar(@PathVariable long id) {
+    public ResponseEntity<Void> ativar(@PathVariable long id) {
         produtoService.ativar(id);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}/permanente")
-    public ResponseEntity<Produto> remover(@PathVariable long id) {
+    public ResponseEntity<Void> remover(@PathVariable long id) {
         produtoService.excluir(id);
         return ResponseEntity.noContent().build();
     }
